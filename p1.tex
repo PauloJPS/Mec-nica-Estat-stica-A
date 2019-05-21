@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper]{geometry}
+\usepackage[myheadings]{fullpage}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{graphicx, wrapfig,  setspace, booktabs}
+\usepackage[T1]{fontenc}
+\usepackage[font=small, labelfont=bf]{caption}
+\usepackage{fourier}
+\usepackage[protrusion=true, expansion=true]{microtype}
+\usepackage{sectsty}
+\usepackage{url, lipsum}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{listings}
+
+
+
+
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+\onehalfspacing
+\setcounter{tocdepth}{5}
+\setcounter{secnumdepth}{5}
+
+%-------------------------------------------------------------------------------
+% HEADER & FOOTER
+%-------------------------------------------------------------------------------
+
+%-------------------------------------------------------------------------------
+% TITLE PAGE
+%-------------------------------------------------------------------------------
+
+\begin{document}
+
+\title{ \normalsize \textsc{Paulo José Paulino de Souz}
+		\\ [2.0cm]
+		\HRule{0.5pt} \\
+		\LARGE \textbf{\uppercase{Prova 1 de Mecânica Estatística A}}
+		\HRule{2pt} \\ [0.5cm]
+		\normalsize  \vspace*{5\baselineskip}}
+
+
+
+\author{Paulo José - 9283890}
+\maketitle
+\newpage
+
+%-------------------------------------------------------------------------------
+% Section title formatting
+\sectionfont{\scshape}
+\section*{Exercício 1}
+A função característica é definida como uma transformada de Fourier da função densidade de probabilidade, sendo assim, para uma função característica aplicando uma transformada inversa de Fourier obtemos a densidade de probabilidade, 
+\begin{equation}
+f(x) = \frac{1}{2\pi}\int\limits_{-\infty}^{\infty}e^{-ikx}f(k)dk \quad. 
+\end{equation}
+Usando a função do enunciado, 
+\begin{equation}
+g(k) = (a + bcos(k)),
+\end{equation}
+a transformada inversa,
+\begin{equation}
+\begin{split}
+f(x) = \frac{1}{2\pi}\int\limits_{-\infty}^{\infty}(a + bcos(k))dk = \\
+\frac{1}{2\pi}\int\limits_{-\infty}^{\infty}e^{-ikx}a dk + \frac{b}{4\pi}\int\limits_{-\infty}^{\infty} e^{-ikx}\left(e^{ik} + e^{-ik}\right)dk = \\
+a\delta(x) + \frac{b}{4\pi}\left( \int\limits_{-\infty}^{\infty}e^{-ik(x - 1)}dk + \int\limits_{-\infty}^{\infty}e^{-ik(x + 1)}dk \right)
+\end{split}\quad,
+\end{equation}
+toma, então a forma:
+\begin{equation}
+f(x) = a\delta(x) + \frac{b}{2}\left(\delta(x-1) + \delta(x+1)\right) \quad.
+\end{equation}
+Comparando essa expressão final com a equação que leva uma distribuição discreta para uma densidade,
+\begin{equation}
+f(x) = \sum_l p_l\delta(x - x_l) \quad ,
+\end{equation}
+obtêm-se a forma discreta da função de probabilidade:
+\begin{equation}
+\begin{split}
+&p_l = a,\quad l = 0 \quad,\\
+&p_l = b/2,\quad l = 1 \quad,\\
+&p_l = b/2,\quad l = -1 \quad. 
+\end{split}
+\end{equation}
+
+Os momentos são calculados usando a função característica pela fórmula:
+\begin{equation}
+\mu_n = i^n \frac{dg(k)}{dk}\Big\rvert_{k=0} \quad.
+\end{equation}
+Calculando os primeiros momentos,
+\begin{equation}
+\begin{split}
+\frac{d (a + b\cos(k))}{dk} = -b\sin(k) \quad,
+\mu_1 = -b\sin(k)\rvert_{k=0} = 0.\\ 
+\frac{d (-b\sin(k))}{dk} = -b\cos(k) \quad, \mu_2 = -(i)^2b\cos(k)\rvert_{k=0} = b. 
+\end{split}
+\end{equation}
+Nota-se que existe uma periodicidade nos momentos, os ímpares serão sempre \textbf{zero} e os pares serão sempre $b$.   Sobre os momentos pares, temos a recorrência,
+\begin{equation}
+\mu_{n=par} = (i)^n b\frac{d^n\cos(k)}{dk} = (i)^n(-1)^{n+1} b\cos(k)\rvert_{k=0} = b.  
+\end{equation}
+
+
+Uma pequena observação a ser feita é que foi usado a definição da delta pela normalização de Fourier,
+\begin{equation}
+\delta(x-a) = \frac{1}{2\pi}\int\limits_{-\infty}^{\infty} e^{-ik(x-a)}dk \quad.
+\end{equation}
+
+\section*{Exercício 2}
+A função de probabilidade de um processo de Poisson é discreta e dada pela lei,
+\begin{equation}
+p_l = \frac{e^{-\lambda} \lambda^l}{l!}, \quad l=\in  \mathcal{N}.
+\end{equation}
+O objetivo aqui é encontrar uma expressão para os cumulantes e para isso irei recorrer para a função característica. Antes de usar a transformada de Fourier é necessário escrever $p_l$ como uma densidade de probabilidade, 
+\begin{equation}
+\begin{split}
+f(x) = \sum_l p_l\delta(x-l) \quad,\\
+f(x) = \sum_l \frac{e^{-\lambda} \lambda^l\delta(x-l)}{l!} \quad.
+\end{split}
+\end{equation}
+Assim a função característica vem naturalmente, 
+\begin{equation}
+\begin{split}
+g(k) = \int e^{ikx}\sum_l \frac{e^{-\lambda} \lambda^l\delta(x-l)}{l!} dx\\
+g(k) = \sum_l \frac{e^{-\lambda} \lambda^l e^{ikl}}{l!} \quad.
+\end{split}
+\end{equation}
+A exponencial em $\lambda$ sai para fora da soma e fatorando o expoente $l$, obtemos a expressão:
+\begin{equation}
+g(k) = e^{-\lambda}\sum_l \frac{(\lambda^l e^{ik})^l}{l!} = e^{-\lambda}e^{\lambda e^{ik}} = e^{\lambda(e^{ik} - 1)} \quad. 
+\end{equation}
+A função geradora de cumulantes é a expansão do $\ln$ da função característica,
+\begin{equation}
+\ln g(k) = \sum\limits{n=1} \frac{(ik)^n \kappa_n}{n!},
+\end{equation}
+e aplicando para a função característica encontrada,
+\begin{equation}
+\ln g(k) = \lambda(e^{ik} - 1) = \lambda\sum_{n=1} \frac{1}{n!}\frac{d^n e^{ik}}{dk}\Big\rvert_{k=0} = \lambda\sum_{n=1} \frac{(ik)^n}{n!} \quad.
+\end{equation}
+Comparado a expansão da função característica com a função geradora de cumulantes concluí-se que todos os cumulantes são iguais e assumem o valor de $\lambda$.
+\begin{equation}
+\kappa_n = \lambda, \quad n=1, 2, 3, \cdots
+\end{equation}
+
+\section*{Exercício 3}
+
+\section*{Exercício 7}
+A equação de Fokker-Planck pode ser escrita como uma equação de continuidade,
+\begin{equation}
+\frac{\partial P(x,t)}{\partial t} = \sum_i\left( \frac{\partial J(x, t)}{\partial t}\right),
+\end{equation}
+onde $J$ é a corrente de probabilidade. 
+
+A entropia é definida como:
+\begin{equation}
+S(t) = -\int P(x,t) \ln P(x,t) dx
+\end{equation}
+\end{document}
