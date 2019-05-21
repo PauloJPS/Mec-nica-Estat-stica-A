@@ -37,10 +37,10 @@
 
 \begin{document}
 
-\title{ \normalsize \textsc{Paulo José Paulino de Souz}
+\title{ \normalsize \textsc{}
 		\\ [2.0cm]
 		\HRule{0.5pt} \\
-		\LARGE \textbf{\uppercase{Prova 1 de Mecânica Estatística A}}
+		\LARGE \textbf{\uppercase{Prova 1:  Mecânica Estatística A}}
 		\HRule{2pt} \\ [0.5cm]
 		\normalsize  \vspace*{5\baselineskip}}
 
@@ -320,18 +320,461 @@ Com isso calcula-se o segundo cumulante,
 \end{equation}
 Mas como $N$ é grande os termos de $p$ e $q$ sozinhos são desprezíveis, então, para o caso de número de passos ímpares temos:
 \begin{equation}
-P_{N, par}(m) = \frac{1}{\sqrt{4\pi Npq}}\exp{\left(-\frac{(m-(p-q))^2}{4Npq}\right)}.
+P_{N, par}(m) = \frac{1}{\sqrt{4\pi Npq}}\exp{\left(-\frac{(m-(p-q))^2}{4Npq}\right)}\quad.
 \end{equation}  
 
-\section*{Exercício 7}
-A equação de Fokker-Planck pode ser escrita como uma equação de continuidade,
+\section*{Exercício 5}
+Para simplificar notação defina:
 \begin{equation}
-\frac{\partial P(x,t)}{\partial t} = \sum_i\left( \frac{\partial J(x, t)}{\partial t}\right),
+<x^2> \equiv x, \quad <v^2> \equiv	 v, \quad <xv> \equiv	 z.
 \end{equation}
-onde $J$ é a corrente de probabilidade. 
+Temos o sistema de equações diferenciais ordinárias de primeira ordem,
+\begin{align}
+&x' = 2z\\
+&z' = v - \gamma z\\
+&v' = -2\gamma v + \Gamma
+\end{align}
+A equação 54 está desacoplada, portanto ela será a primeira. Primeiro analisando a parte homogênea
+\begin{equation}
+\begin{split}
+\frac{dv}{dt} = -2\gamma v \\
+\frac{dv}{v} = d\ln v = -2\gamma dt\\
+v = Ae^{-2\gamma t} + B \quad. 
+\end{split}
+\end{equation}
+Substituindo essa solução na edo original, 
+\begin{equation}
+\begin{split}
+-2\lambda Ae^{-2\gamma t} = -2\lambda(Ae^{-2\gamma t} + B) + \Gamma \rightarrow \\
+\rightarrow B = \frac{\Gamma}{2\gamma}
+\end{split}
+\end{equation}
+Na condição inicial em que $v(0) = v_0^2$, temos,
+\begin{equation}
+\begin{split}
+v(0) = v_0^2 = A + \frac{\Gamma}{2\gamma} \rightarrow \\
+\rightarrow A = v_0^2 - \frac{\Gamma}{2\gamma}\quad . 
+\end{split}
+\end{equation}
+Usando essa solução pode-se resolver a equação 53, que substituindo $v$ toma a forma:
+\begin{equation}
+z' = Ae^{-2\gamma t} + B - \gamma z.
+\end{equation}
+onde $A$ e $B$ são as constantes provenientes das solução de $v$, indicadas na equações 56 e 57. 
+Um equação diferencial de primeira ordem não homogênea pode ser separada como a solução homogênea mais uma particular, 
+\begin{equation}
+y = y_h + y_p\quad ,
+\end{equation}
+A homogênea é calculada,
+\begin{equation}
+\begin{split}
+z_h' = -\gamma z \\
+z_h(t) = Ce^{-\gamma t} \quad. 
+\end{split}
+\end{equation}
+A argumentação usada para encontrar a função particular parte de que a função que quebra a homogeneidade da EDO é a exponencial, e dessa forma, a solução particular precisa ser combinação linear da parte não homogênea e a única função que possui essa propriedade é a própria exponencial.  Então,
+\begin{equation}
+z = z_h = z_p = Ce^{-\gamma t } + De^{-2\gamma t} + E, 
+\end{equation}
+que substituindo na EDO,
+\begin{equation}
+\begin{split}
+-\gamma C e^{-\gamma t} -2\gamma De^{-2\gamma t} = Ae^{-2\gamma t} + B - \gamma\left(Ce^{-\gamma t } + De^{-2\gamma t} + E\right) \\
+\rightarrow -\gamma De^{-2\gamma t} = Ae^{-2\gamma t} + B + \gamma E \\
+\rightarrow D = \frac{-A}{\gamma}, \quad E = \frac{-\Gamma}{2\gamma^2} \quad . 
+\end{split}
+\end{equation}
+Calculando a constante $C$ avaliando $z$ em $t=0$, 
+\begin{equation}
+z(0) = x_0v_0 = C - \frac{v_0^2}{\gamma} + \frac{\Gamma}{2\gamma^2} - \frac{\Gamma}{2\gamma^2} \rightarrow C = x_0v_0 + \frac{v_0^2}{\gamma}
+\end{equation}
 
-A entropia é definida como:
+A última EDO é encontrada substituindo $z$ na equação 52, 
 \begin{equation}
-S(t) = -\int P(x,t) \ln P(x,t) dx
+x' = 2\left(Ce^{-\gamma t} + De^{-2\gamma t} + E \right) \quad, 
 \end{equation}
+multiplicando tudo por $dt$ e integrando,
+\begin{equation}
+x(t) = 2\left( \frac{C}{-\gamma}e^{-\gamma t} + \frac{D}{-2\gamma} + E t + F\right)
+\end{equation}
+Avaliando no limite $t=0$,
+\begin{equation}
+\begin{split}
+x(0) = x_0^2 = \frac{2}{-2\gamma}\left(x_0v_0 + \frac{v_0^2}{\gamma}\right) + \frac{2}{\gamma}\left(v_0^2 - \frac{\Gamma}{2\gamma} \right)\frac{1}{2\gamma} + E \\
+x_0^2 = -\frac{-2x_0v_0}{\gamma} - \frac{\Gamma}{2\gamma^3} + E \\
+E = x_0^2 + \frac{2x_0v_0}{\gamma} + \frac{\Gamma}{2\gamma^3}
+\end{split}
+\end{equation}
+Resumindo, as soluções são:
+\begin{align}
+& x = \frac{-2}{\gamma}\left( x_0v_0 + \frac{v_0^2}{\gamma}\right)e^{-\gamma t} + \frac{1}{\gamma^2}\left(v_0^2 -\frac{\Gamma}{2\gamma}\right)e^{-2\gamma t} - \frac{-\Gamma t}{\gamma^2} + x_0^2 + \frac{2x_0v_0}{\gamma} + \frac{\Gamma}{2\gamma^3} \\
+& z = \left(x_0v_0 + \frac{v_0^2}{\gamma}\right)e^{-\gamma t} - \frac{1}{\gamma}\left(v_0^2 - \frac{\Gamma}{2\gamma}\right)e^{-2\gamma t} - \frac{\Gamma}{2\gamma} \\
+& v = \left(v_0^2 - \frac{\Gamma}{2\gamma}\right)e^{-2\gamma t} + \frac{\Gamma}{2\gamma} \\
+\end{align}
+
+
+\section*{Exercício 7}
+Por definição, uma força conservativa pode ser escrita em termos do gradiente de um potencial escalar,
+\begin{equation}
+f_i(x) = -\frac{d V(x)}{dx_i} \quad.
+\end{equation}
+A média de uma função é calculada através da medida,
+\begin{equation}
+<f> = \int\limits_{-infty}^{\infty} f(x) P(x) dx, \quad
+\end{equation}
+onde $P(x)$ é densidade de probabilidade sobre qual a média é calculada. Dito isso, devemos mostrar que,
+\begin{equation}
+\frac{2}{\Gamma_i}<f_i^2> = -<\frac{df_i}{dx}> \quad
+\end{equation}
+A corrente densidade de probabilidade é definida a partir da equação de Fokker-Planck como:
+\begin{equation}
+J = f_iP - \frac{\Gamma}{2}\frac{dP}{dx_i} \quad,
+\end{equation}
+no caso estacionário e com reversibilidade microscópica essa correte se anula e assim a força $f_i$ é escrita em termos da densidade de probabilidade,
+\begin{equation}
+f_i = \frac{\Gamma}{2P}\frac{dP}{dx_i} = \frac{\Gamma}{2}\frac{d\ln P}{dx_i}\quad .
+\end{equation}
+Escrevendo integral que representa o primeiro termo do fluxo entrópico no sistema,
+\begin{equation}
+\frac{2}{\Gamma} = \int f^2_i(x) P(x) dx \quad,
+\end{equation}
+escrevendo a força ao quadrado,
+\begin{equation}
+f^2_i(x) = \left(\frac{-dV(x)}{dx_i}\right)f_i(x) \quad,
+\end{equation}
+que substituída na integral resulta em:
+\begin{equation}
+\frac{2}{\Gamma} \int \left(\frac{-dV(x)}{dx_i}\right)f_i(x) P(x) dx \quad ,
+\end{equation}
+Escrevendo a parcela $f_i$ como na equação 75,
+\begin{equation}
+\frac{2}{\Gamma} \int \left(\frac{-dV(x)}{dx_i}\right)\frac{\Gamma}{2}\frac{d\ln P}{dx_i} P(x) dx \quad ,
+\end{equation}
+que integrando por partes,
+\begin{equation}
+<\frac{df(x)}{dx_i}> = \frac{\Gamma}{2}\left[ \frac{-\partial V}{\partial x_i} P\Big\rvert_a^b - \int \frac{\partial^2 V}{\partial x_i^2}P(x) dx  \right] \quad ,
+\end{equation}
+e como as probabilidades devem se anular nos intervalos a média da derivada da força é dada pela equação,
+\begin{equation}
+<\frac{df(x)}{dx_i}> =-\frac{\Gamma}{2}<f_i^2> \quad,
+\end{equation}
+de onde concluímos que o fluxo entrópico no equilíbrio com reversibilidade microscópica dado por:
+\begin{equation}
+\Phi = \sum\limits_i \left( \frac{2}{\Gamma}<f^2_i> + <\frac{df_i}{dx_i}>\right) = 0
+\end{equation}
+para todos os termos da soma.
+
+\section*{Exercício 8}
+A equação de Kramers é uma generalização da equação de Fokker-Planck para duas variáveis, incluindo as velocidades. Admitindo um número $n$ de partículas as equações de Kramers tomam a forma:
+\begin{equation}
+\frac{\partial P}{\partial t} = -\sum_i \frac{\partial J^x_i}{\partial x_i} -\sum_i \frac{\partial J^v_i}{\partial v_i}. 
+\end{equation}
+onde agora temos a corrente da probabilidade dependendo de duas variáveis posição e velocidade. 
+Temos que a componente da velocidade da corrente de probabilidade é dada por:
+\begin{equation}
+J_i^v = (f_i - \gamma v_i)P - \frac{\Gamma_i}{2}\frac{\partial P}{\partial v_i} \quad ,
+\end{equation}
+e que a parte espacial é dada por:
+\begin{equation}
+J_i^x = v_iP \quad .
+\end{equation}
+Como o objetivo é analisar a distribuição de probabilidade no equilíbrio, considere :
+\begin{equation}
+\begin{split}
+\frac{\partial P}{\partial t} = 0 \rightarrow\\
+\rightarrow \sum_i\frac{dJ_i^v}{dv_i} = -\sum_i\frac{dJ_i^x}{dx_i} \rightarrow \frac{dJ_i^v}{dv_i} = -\frac{dJ_i^x}{dx_i} \quad.
+\end{split}
+\end{equation}
+A corrente espacial de $J$ me a corrente de probabilidade que passa numa posição $x$ com velocidade $v$, então é natural quando se muda o sentido da velocidade da corrente a parte espacial, que mede a corrente na posição mude o sentido e isso é verificado pela equação 85, assim:
+\begin{equation}
+J_i^x = v_iP(x) \rightarrow J_i^{x, -v} = -J_i^x(x, v) \quad. 
+\end{equation}
+Sobre a componente da velocidade, a probabilidade não varia no tempo, então
+\begin{equation}
+\frac{\partial J_i^x}{\partial x_i} + \frac{\partial J_i^v}{\partial v_i} = 0\quad,
+\end{equation} 
+e que no equilíbrio a corrente de probabilidade total é zero, 
+\begin{equation}
+\frac{\partial J_i^x}{\partial x_i} = -\frac{ \partial J_i^v}{\partial v_i} \quad.
+\end{equation}
+com isso se trocarmos o sinal da velocidade:
+\begin{equation}
+\frac{J_i^v(x, -v)}{\partial v_i} = \frac{J_i^x(x, -v)}{\partial x_i}  = \frac{J_i^x(x, v)}{\partial x_i}  = -\frac{J_i^v(x, v)}{\partial v_i}  \quad,
+\end{equation}
+portanto a componente da velocidade da corrente de probabilidade é par em relação a velocidade. Usando isso na equação 84, temos:
+\begin{equation}
+J_i^v(x, -v) = (f_i + \gamma v_i)P(x,v) + \frac{\Gamma}{2} \frac{\partial P}{\partial v_i} =  (f_i - \gamma v_i)P(x,v) - \frac{\Gamma}{2} \frac{\partial P}{\partial v_i)} = J_i^v(x, v)
+\end{equation}
+dessa forma concluí-se que:
+\begin{equation}
+\gamma v_iP(x,v) + \frac{\Gamma}{2} \frac{\partial P}{\partial v_i)} = 0 \quad .
+\end{equation}
+Como a probabilidade deve ter a mesma paridade de $J$ e $J(x)$ é calculado integrando a componente espacial para todas as velocidades,
+\begin{equation}
+J(x) = \int J^x(x, v) dv \quad, 
+\end{equation}
+como $J^x$ é impar, então $J(x)$ é par e assim, $P(x, v)$ é par.
+
+Dito isso, como o objetivo é encontrar a distribuição de probabilidade no equilíbrio então podemos reescrever a equação 92 como:
+\begin{equation}
+\gamma v_i = - \frac{\Gamma}{2 P} = -\frac{\Gamma}{2}\frac{\partial \ln P}{d v_i} \quad,
+\end{equation}
+integrando e exponenciando obtém-se:
+\begin{equation}
+P(x, v_i) = A(x)\exp\left(-\frac{\gamma v_i^2}{2\Gamma} \right) 
+\end{equation}
+que para um conjunto de $n$ variáveis toma a forma:
+\begin{equation}
+P(x, v) = A(x)\exp\left(-\frac{\sum_i\gamma v_i^2}{2\Gamma} \right) 
+\end{equation}
+onde vou denotar a parte espacial como $P(v)$.
+Para encontrar a função de $A(x)$ primeiro note que a paridade de $J_i^v$ impõe que $J_i^v = Pf_i$ e usando a definição de $J_i^x$ na equação de Kramers,
+\begin{equation}
+vi\frac{\partial P}{\partial x_i} + \frac{\partial f_iP}{\partial v_i} = 0 
+\end{equation}
+substituindo $P$, 
+\begin{equation}
+\begin{split}
+P(v)\frac{dA(x)}{d_xi} + A(x)\frac{(-2f_i\gamma v_i)}{2\Gamma} P(v) = 0
+\end{split}
+\end{equation}
+Assim, dividindo tudo por $A(x)$,
+\begin{equation}
+\frac{dA(x)}{Adx_i} = \frac{d \ln A(x)}{dx_i} = \frac{f_i 2\gamma}{\gamma} \quad,
+\end{equation}
+se $f_i = (-\partial V /\partial x_i)$, então:
+\begin{equation}
+A(x) \propto \exp \left( -\frac{2\gamma}{\Gamma}V(x)\right)
+\end{equation}
+Por fim a função total de probabilidade é escrita:\begin{equation}
+P(x,v) = \frac{1}{Z} \exp\left[\frac{-2\gamma}{\Gamma}\left(V(x) + \frac{1}{2}\sum_i v_i^2 \right)\right]
+\end{equation}
+e usando a conexão com a termodinâmica do parâmetro da força aleatória,
+\begin{equation}
+\Gamma = 2\gamma K_b T/m 
+\end{equation}
+onde $K_b$ é a constante de Boltzman e T é a temperatura, encontramos a distribuição:
+\begin{equation}
+P(x,v) = \frac{1}{Z} \exp\left[\frac{-1}{K_bT}\left(U(x) + \frac{m}{2}\sum_i v_i^2 \right)\right]
+\end{equation}
+O que é muito doido. Outro resultado que lembro de ter obtido usando teoria cinética dos gases, porém com esse formalismo é mais elegante, acredito eu. Lembro de ter aplicado essa equação para um potencial gravitacional e obtido a lei das pressões.
+
+O papel da reversibilidade microscópica que permite encontrarmos as distribuição bem feitas e fechadas dessa forma é que temos uma corrente de probabilidade total que impõe a paridade par na componente da velocidade, além disso, esse regime impõe uma ausência de dissipação, ou seja, ele só ocorre se $f$ for conservativa. Com $f$ sendo conservativa podemos escreve-la em termos de um potencial e a parte espacial de $P$ pode ser integrada. 
+
+\section*{Exercício 9}
+A matriz de transição do problema é dada por:
+\begin{equation}
+T_{m,n} = 
+ \begin{pmatrix}
+  0 & 0 & p \\
+  1 & 0 & q \\
+  0 & 1 & 0 \\
+ \end{pmatrix}
+\end{equation}
+Para calcular os autovalores considere o determinante 
+\begin{equation}
+det\left[
+ \begin{pmatrix}
+  -\lambda & 0 & p \\
+  1 & -\lambda & q \\
+  0 & 1 & -\lambda \\
+ \end{pmatrix}\right] = 0
+\end{equation}
+de onde obtém o polinômio característico,
+\begin{equation}
+-\lambda^3 + q\lambda + p = 0
+\end{equation}
+Como $T$ possui as propriedades de uma matriz estocástica ela deve ter uma autovalor igual a um, testando:
+\begin{equation}
+-1 + 1q + p = -1 + (1) = 0 \quad. 
+\end{equation}
+Com isso, sabe-se que o traço e o determinante da matriz são invariantes por mudança de base, então na base dos autovalores temos:
+\begin{align}
+1 + \lambda_2 + \lambda_3 = 0 \quad, \\
+\lambda_2 \lambda_3 = p  \quad. 
+\end{align}
+Isolando a equação da soma e substituindo na multiplicação,
+\begin{equation}
+\lambda_3^2 + \lambda_3 + p = 0 \quad ,
+\end{equation}
+que resolvendo por Baskara,
+\begin{equation}
+\lambda_3 = \frac{-1 \pm \sqrt{1 - 4p}}{2},
+\end{equation}
+substituindo $\lambda_3$ na equação 87 encontramos $\lambda_2$, 
+\begin{equation}
+\lambda_2 = -1 - \lambda_3 = -1 \frac{1\mp \sqrt{1 - 4p}}{2} = \frac{-1\mp\sqrt{1-4p}}{2} \quad.
+\end{equation}
+Usando os autovalores pode-se escrever a matriz estocástica $T$ na base diagonal,
+\begin{equation}
+T_{m,n} = 
+ \begin{pmatrix}
+  1 & 0 & p \\
+  0 & \frac{-1+\sqrt{1-4p}}{2} & 0 \\
+  0 & 0 & \frac{-1-\sqrt{1-4p}}{2} \\
+ \end{pmatrix} \quad,
+\end{equation}
+Dessa forma, dado uma probabilidade inicial na base diagonal a matriz coluna de probabilidade na iteração $l$, na base diagonal, é dada por:
+\begin{equation}
+\begin{pmatrix}
+P_l(0) \\
+P_l(1) \\
+P_l(2)
+\end{pmatrix} = 
+ \begin{pmatrix}
+  1^l & 0 & 0 \\
+  0 & \left[\frac{-1+\sqrt{1-4p}}{2}\right]^l & q \\
+  0 &  & \left[\frac{-1-\sqrt{1-4p}}{2}\right]^l \\
+ \end{pmatrix}
+\begin{pmatrix}
+P_0(0) \\
+P_0(1) \\
+P_0(2)
+\end{pmatrix}
+\end{equation}
+E como para passar para a base canônica o WolframAlpha nos fornece a matriz mudança de base,
+\begin{equation} 
+S = 
+ \begin{pmatrix}
+  p & 0.5(\sqrt{1-4p}-1) & 0.5(-\sqrt{1-4p}-1) \\
+  1 & 0.5(-\sqrt{1-4p}-1) & 0.5(\sqrt{1-4p}-1) \\
+  1 & 1 & 1 \\
+ \end{pmatrix}
+\end{equation}
+e sua inversa:
+\begin{equation} 
+S^{-1} = 
+ \begin{pmatrix}
+  1/(p+2) & 1/(p+2) & 1/(p+2) \\
+  \frac{\frac{3}{\sqrt{1-4p}}-1}{2(p+2)} & -\frac{2p+\sqrt{1-4p}+1}{2\sqrt{1-4p}(2+p)} & \frac{\frac{-p}{\sqrt{1-4p}} + p + \frac{1}{\sqrt{1-4p}}+1} {2p+4} \\
+  -\frac{\frac{3}{\sqrt{1-4p}}-1}{2(p+2)} & \frac{2p+\sqrt{1-4p}+1}{2\sqrt{1-4p}(2+p)} & \frac{\frac{p}{\sqrt{1-4p}} + p - \frac{1}{\sqrt{1-4p}}+1} {2p+4} \\
+ \end{pmatrix}
+\end{equation}
+Assim temos a solução na base canônica:
+\begin{equation}
+P_l = S T^l S^{-1}  P \quad ,
+\end{equation}
+onde $T^l$ está na base diagonal e os vetores colunas estão na base canônica
+
+\section*{Exercício 10}
+A função $H$ de Boltzman,
+\begin{equation}
+H(t) = \sum_n P_n(t)\ln\frac{P_n(t)}{P_n^e}
+\end{equation}
+é uma função temporal da estatística do sistema que relaciona o transiente com o estacionário. Dada sua estrutura matemática podemos escreve-la,
+\begin{equation}
+H(t) = \sum_n P_n(t) \ln P_n(t) - \sum_n P_n(t)\ln P_n^e \quad.
+\end{equation}
+A entropia de Boltzman pode ser relacionada com o primeiro termo dessa função, 
+\begin{equation}
+H = \frac{-S(t)}{K_b} - \sum_n P_n(t)\ln P_n^e \quad.
+\end{equation}
+Para estudar então $H$ é necessário entender o comportamento da entropia do sistema. Sendo assim considere a variação temporal de $S$,
+\begin{equation}
+\frac{d S}{dt} = k\sum_n \frac{dP}{dt}\ln P + K\sum \frac{dP}{dt} = k\sum_n \frac{dP}{dt}\ln P \quad,
+\end{equation}
+onde o segundo termo pode ter a deriva tirada da soma, a soma é constante pois a probabilidade é normalizada então como a derivada de uma constante é zero esse termo é zero. Prosseguindo, da equação mestra, 
+\begin{equation}
+\frac{dP_n}{dt} = \sum_m \left[W_{nm}P_m - W_{mn}P_m\right] \quad,
+\end{equation}
+substituí-se a derivada temporal na variação da entropia,
+\begin{equation}
+\frac{dS}{dt} = k \sum_n\sum_m \ln P_n \left[W_{nm}P_m - W_{mn}P_m\right] \quad.
+\end{equation}
+Separando a soma,
+\begin{equation}
+\frac{dS}{dt} = k \sum_n\sum_m \ln P_n W_{nm}P_m -k\sum_n\sum_m \ln P_n W_{mn}P_m \quad,
+\end{equation}
+trocando os índices da segunda soma e reagrupando, obtemos,
+\begin{equation}
+\frac{dS}{dt} = -k \sum_n\sum_m W_{nm}P_m\ln\frac{P_n}{P_m} \quad.
+\end{equation}
+Porém a variação temporal da entropia pode ser escrita como menos um fluxo entrópico no sistema, $\Phi$, mais a produção entrópica do sistema, $\Pi$,
+\begin{equation}
+\frac{dS}{dt} = \Pi - \Phi \quad.
+\end{equation}
+Voltando para a equação 125, some e divida no $\ln$ os elementos de matriz, $W_{mn}/W_{nm}$, 
+\begin{equation}
+\frac{dS}{dt} = -k \sum_n\sum_m W_{nm}P_m\ln\frac{P_n W_{mn}/W_{nm}}{P_mW_{mn}/W_{nm}} \quad,
+\end{equation}
+usando a propriedade do $\ln$ separamos as duas equações,
+\begin{equation}
+\frac{dS}{dt} = -k \sum_n\sum_m W_{nm}P_m\ln \frac{PnW_{nm}}{P_mW_{nm}} + k \sum_n\sum_m W_{nm}P_m\ln \frac{W_{mn}}{W_{nm}} \quad,
+\end{equation}
+que atribuímos cada termo desse a uma grandeza:
+\begin{align}
+\Pi = -k \sum_n\sum_m W_{nm}P_m\ln \frac{PnW_{nm}}{P_mW_{nm}} \quad ,\\
+\Phi = k \sum_n\sum_m W_{nm}P_m\ln \frac{W_{mn}}{W_{nm}} \quad .
+\end{align}
+Com esse resultados escritos vamos analisar a cara da energia do sistema. A energia do sistema em função do tempo,
+\begin{equation}
+U(t) = \sum_n E_n P_n(t) \quad,
+\end{equation}
+possui variação temporal igual a:
+\begin{equation}
+\frac{dU(t)}{dt} = \sum_n E_n \frac{dP_n(t)}{dt} \quad,
+\end{equation}
+e utilizando o mesmo resultado da equação mestra que foi usado para entropia para a variação temporal da probabilidade,
+\begin{equation}
+\frac{dU(t)}{dt} = \sum_n\sum_m E_n\left[W_{nm}P_m - W_{mn}P_m\right] \quad,
+\end{equation}
+e fazendo o truque de separar as somas e trocar o índice, obtemos por fim:
+\begin{equation}
+\frac{d U(t)}{dt} = \sum_n\sum_m (E_n - E_m) W_{nm}P_m \quad. 
+\end{equation}
+
+Quando o sistema está em contato com um reservatório térmico, os elementos da matriz de transição são dados por:
+\begin{equation}
+W_{nm} = A_{nm}e^{-(E_n-E_m)/2kT}, 
+\end{equation}
+e assim a razão da taxa de transição do estado $n$  para o $m$ pela taxa do estado $m$ para o $n$ é dada por:
+\begin{equation}
+\frac{W_{nm}}{W_{mn}} = e^{-(E_n - E_m)/KT}
+\end{equation}
+que quando substituído no fluxo de entropia,
+\begin{equation}
+\begin{split}
+\Phi = k \sum_n\sum_m W_{nm}P_m\ln \frac{W_{mn}}{W_{nm}} = \Phi = K \sum_n\sum_m W_{nm}P_m\ln e^{-(E_n - E_m)/KT} = \\
+= \frac{1}{T} \sum_n\sum_m W_{mn}P_n(E_n - E_m) = \frac{1}{T}\frac{dU(t)}{dt}
+\end{split}
+\end{equation}
+Usando esse resultado podemos substituí-lo na variação da entropia,
+\begin{equation}
+\begin{split}
+\frac{dS}{dt} = \Pi - \frac{1}{T}\frac{dU}{dt}\rightarrow\\
+\rightarrow \frac{dU}{dt} + \frac{TdS}{dt} = T\Pi \quad.
+\end{split}
+\end{equation}
+Esse resultado mostra que a produção entrópica do sistema é dada pela variação da energia mais a variação da entropia vezes a temperatura. 
+Dessa forma definimos a produção entrópica como a variação de um potência gerador,
+\begin{equation}
+\frac{dF}{dt} = -T\Pi \quad,
+\end{equation}
+onde $F$ é definido com a energia livre de Helmholtz. Num sistema em equilíbrio as probabilidades tendem ao estado estacionário e então elas são expressas em termos da função de partição canônica, $Z$,
+\begin{equation}
+P_n^e = \frac{1}{Z} e^{-E_n /KT} \quad,
+\end{equation}
+Por fim substituindo esses resultados na função $H$, obtemos:
+\begin{equation}
+\begin{split}
+H(t) = \sum_n P_n(t)\ln P_n(t) - \sum_n P_n \ln \frac{1}{Z} e^{-E_n /KT} =\\
+= \sum_n P_n(t)\ln P_n(t) \frac{1}{KT}\sum_n P_n E_n +  \ln Z = \\
+= \frac{-S}{K} + \frac{U}{KT} + \ln Z \quad. 
+\end{split}
+\end{equation}
+Comparando a função $H$ com a derivada $dF/dt$, percebemos que elas são relacionadas da seguinte forma:
+\begin{equation}
+H = -\frac{S}{K} + \frac{U}{KT} = \frac{F}{KT} -\frac{F_0}{KT} \quad.
+\end{equation}
+e então a energia livre no equilíbrio é dada por:
+\begin{equation}
+F_0 = -KT \ln Z \quad,
+\end{equation}
+que é nada mais nada menos que a função de partição do sistema. 
+
+
+Alguns pontes a serem discutidos sobre esse resultado. 
+O primeiro e o menos importante é que essa matemática não me era muito conhecida a um tempo atrás e então quando fazia o algorítimo de metropolis para o modelo de Ising não entendi muito bem o que estava acontecendo estatisticamente. O segundo ponto é que a energia livre tem uma interpretação puramente matemática quando se fala apenas de termodinâmica que é a transformada de legendre da energia com respeito a entropia. Porém essa formalização via mecânica estatística mostra que esse gerador termodinâmico possui um sentido físico bem definido que se diz respeito a produção entrópica do sistema. Isso é como a derivada desse potencial está relacionada com a produção entrópica, quando ela é zero a produção entrópica é zero. Outro ponto a ser notado que é a entropia no equilíbrio é máxima porém constante, dessa forma como a derivada da função partição está relacionada com o negativo da produção entrópica, a energia livre de Helmholzt sempre decresce.  
+
+
 \end{document}
