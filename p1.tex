@@ -233,6 +233,95 @@ P_m(N) = \frac{1}{\sqrt{2\pi Nq}}\exp{\left[-\frac{m^2}{2Nq}\right]}
 \end{equation}
 
 \section*{Exercício 4}
+Neste problema temos um \textit{bêbado} unidimensional que está muito, mais muito bêbado, que ficou coxo. Devido a esse problema seus passos são dados com funções de probabilidade diferentes dependendo se ele está no passo par ou no ímpar. Para o passo par ele tem a função de probabilidade,
+\begin{equation}
+\begin{split}
+p_l = p, \quad l=1,\\
+p_l = q, \quad l=-1,
+\end{split}
+\end{equation} 
+e para o passo ímpar ele tem a função de probabilidade dada por:
+\begin{equation}
+\begin{split}
+p_l = q, \quad l=1,\\
+p_l = p, \quad l=-1,
+\end{split}
+\end{equation}
+com função características,
+\begin{equation}
+\begin{split}
+g_p(k) = (p^{ik} + qe^{-ik}) \quad, \\
+g_p(k) = (q^{ik} + pe^{-ik}) \quad.
+\end{split}
+\end{equation}
+Para encontrar a distância percorrida por esse bêbado considere a variável aleatória,
+\begin{equation}
+m = \sum_i \sigma_i \quad,
+\end{equation}
+onde o $\sigma_i$ é ensaio, passo, do bêbado no tempo $i$. Como temos que os valores de $sigma_i$ mudam conforme a paridade do intervalo de tempo, é natural separar a soma em duas, uma que percorre sobre intervalos pares e a outra sobre intervalos ímpares,
+\begin{equation}
+m = \sum_{i, par} \sigma_i + \sum_{j, ímpar}\sigma_j\quad. 
+\end{equation}
+A função característica de $m$ deverá ser dividida em dois casos um caso com o número de passos fixo em um número par e o outro caso num número ímpar. Isso ficará mais claro no desenvolvimento da matemática. Considere a função característica de $m$ para um caso par,
+\begin{equation}
+g_{N,par}(k) = \prod\limits_{i=0}^N g(k) = g_p(k)^{N/2}g_i(k)^{N/2}, 
+\end{equation}
+onde foram dados $N/2$ passos em intervalos pares e $N/2$ em intervalos ímpares. Como os expoentes são iguais podemos multiplica-los,
+\begin{equation}
+g_{N,par}(k) = (p^2 + q^2 + pq(e^{ik} + e^{-ik})^{N/2} = (p^2 + q^2 + 2pq\cos(k))^{N/2} \quad.
+\end{equation}
+A semelhança com o problema $3$ nos leva interpretação que este problema é análogo ao problema de um bêbado que ficar parado com probabilidade $p^2 + q^2$ e anda pra direita ou esquerda com probabilidade $pq$. Continuando, como o interesse é encontrar a distribuição para $N$ grande vale usar do teorema do limite central e escrever a distribuição de probabilidades da forma,
+\begin{equation}
+P_{N}(m) = \frac{1}{\sqrt{2\pi\kappa_2}}\exp{\left(-\frac{(m-\kappa_1)^2}{2\kappa_2}\right)}, 
+\end{equation}
+então, calculando os momentos,
+\begin{equation}
+\begin{split}
+\frac{d(p2 + q^2 + 2qp\cos(2k))^{N/2}}{dk} = \frac{N}{2}\left(p2 + q^2 + 2qp\cos(2k)\right)^{N/2 - 1}\left(-4pq\sin(2k)\right)\\
+\mu_1 = i\frac{idg(k)}{dk}\Big\rvert_{k=0} = 0. 
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+i^2\frac{d^2g(k)}{dk^2} =  \frac{N}{2}\left(\frac{N}{2}-1)(p^2 + q^2 + 2pq\cos(2k)\right)^{\frac{N}{2}-2}\left(-4p^2q^2\sin(2k)\right)^2 +\\
++ \left(p^2 + q^2 + 2pq\cos(2k)\right)^{\frac{N}{2}}(-4pq\cos(2k))\\
+\mu_2 = 4Npq.
+\end{split}
+\end{equation}
+Com isso escreve-se a distribuição de probabilidade para o caso par,
+\begin{equation}
+P_{N, par}(m) = \frac{1}{\sqrt{4\pi Npq}}\exp{\left(-\frac{(m)^2}{4Npq}\right)}.
+\end{equation}
+Para $N$ ímpar a função característica possui termo a mais, pois tem um intervalo de tempo ímpar que não pode ser dividido no $N/2$, 
+\begin{equation}
+g_{N,ímpar}(k) = (qe^{ik} + pe^{-ik})(p^2 + q^2 + 2pq\cos(k))^{N/2} \quad.
+\end{equation}
+O cálculo do primeiro momento,
+\begin{equation}
+\begin{split}
+&\frac{d(p2 + q^2 + 2qp\cos(2k))^{N/2}(qe^{ik} + pe^{-ik})}{dk} = \\
+&= \frac{N}{2}\left(p2 + q^2 + 2qp\cos(2k)\right)^{N/2 - 1}\left(-4pq\sin(2k)\right)(qe^{ik} + pe^{-ik})- \\
+& - (p^2 + q^2 + 2qp\cos(2k))^{N/2}(iqe^{ik}-ipe^{-ik})\\
+&\mu_1 = i\frac{idg(k)}{dk}\Big\rvert_{k=0} = i*(iq - ip) = p - q. 
+\end{split}
+\end{equation}
+O segundo momento é trabalhoso e por isso, observe os termos que serão derivados. Na primeira parcela o primeiro termo sera derivado e aparecerá outro seno que vai zerar tudo, o segundo termo vai aparecer um cosseno e o terceiro o seno mata. Na segunda parcela a derivada do primeiro termo gera o seno que mata a parcela e a derivada do segundo termo muda o sinal. Dessa forma,
+\begin{equation}
+\begin{split}
+\frac{d^2g_{impar}(k)}{dk^2} = \frac{N}{2}\left(p2 + q^2 + 2qp\cos(2k)\right)^{N/2 - 1}\left(-8pq\cos(2k)\right)(qe^{ik} + pe^{-ik}) + \\
++ (p^2 + q^2 + 2qp\cos(2k))^{N/2}(iqe^{ik}-ipe^{-ik})
+\\
+\mu_2 = \frac{i^2d^2g(k)}{dk}\Big\rvert_{k=0} = 4Npq - (p -q). 
+\end{split}
+\end{equation}
+Com isso calcula-se o segundo cumulante,
+\begin{equation}
+\kappa_2 = \mu_2 - \mu_1 = 4Npq - q + p - (p - q)^2 = 4Npq - q + p -(p - q)^2 \quad, 
+\end{equation}
+Mas como $N$ é grande os termos de $p$ e $q$ sozinhos são desprezíveis, então, para o caso de número de passos ímpares temos:
+\begin{equation}
+P_{N, par}(m) = \frac{1}{\sqrt{4\pi Npq}}\exp{\left(-\frac{(m-(p-q))^2}{4Npq}\right)}.
+\end{equation}  
 
 \section*{Exercício 7}
 A equação de Fokker-Planck pode ser escrita como uma equação de continuidade,
