@@ -147,6 +147,92 @@ Comparado a expansão da função característica com a função geradora de cum
 \end{equation}
 
 \section*{Exercício 3}
+O nosso problema se resume em um \textit{bêbado} unidimensional que anda para direita com probabilidade $q/2$, para esquerda com probabilidade $q/2$ e, como está muito bêbado, fica parada com probabilidade $p$. Pela normalização, $p+q=1$. A função de probabilidade desse problema é então,
+\begin{equation}
+\begin{split}
+p_l = p, \quad l=0, \\
+p_l = \frac{q}{2}, \quad l=0,\\
+p_l = \frac{q}{2}, \quad l=0.
+\end{split}
+\end{equation}
+No contínuo a densidade de probabilidade é dada pela fórmula,
+\begin{equation}
+f(x) = \sum_l p_l\delta(x-l) \quad,
+\end{equation}
+e combinada com a definição de função característica, obtemos:
+\begin{equation}
+g(k) = \sum_l p_l e^{ikl} = pe^{-ik0} + \frac{q}{2}e^{ik} + \frac{q}{2}e^{-ik} \quad, 
+\end{equation}
+Prosseguindo, defina a variável aleatória que é a soma de variáveis,
+\begin{equation}
+m = \sum_i \sigma_i \quad,
+\end{equation}
+onde $\sigma_i$ são os ensaios, passos, do \textit{bêbado}. Temos que a função característica de uma soma de variáveis aleatórias uniformes e identicamente distribuídas é dada por:
+\begin{equation}
+g_m(k) = \prod\limits_{i=1}^N g(k) = g(k)^N \quad,  
+\end{equation}
+que nesse caso assume a forma:
+\begin{equation}
+g_m(k) = (p + \frac{q}{2}e^{ik} + \frac{q}{2}^e{-ik})^N,
+\end{equation}
+que expandindo em trinômio de Newton, obtemos:
+\begin{equation}
+g_m(k) = \sum\limits_{l=0}^N \sum\limits_{\omega=0}^l \frac{N!}{(N-l)!(l-\omega)!\omega !} p^{N-l} \left(\frac{q}{2}e^{ik}\right)^{l-\omega}\left(\frac{q}{2}e^{-ik}\right)^{\omega} \quad,
+\end{equation}
+organizando os termos de forma que haja apenas uma exponencial para que seja aplicada a função inversa de fourier,
+\begin{equation}
+g_m(k) = \sum\limits_{l=0}^N \sum\limits_{\omega=0}^l \frac{N!}{(N-l)!(l-\omega)!\omega !} p^{N-l} \left(\frac{q}{2}\right)^{l}e^{ik(l-2\omega)} \quad.
+\end{equation}
+Agora é necessário fazer uma manipulação nas variáveis do somatório para que ela concorde com o argumento da exponencial. É natural escolher a nova variável como a do argumento da exponencial, assim defina:
+\begin{equation}
+m = l - 2\omega \quad,
+\end{equation}
+e com isso troca-se a variável do primeiro somatório por $m$. Com isso deve-se analisar os limites da nova variável. O valor máxima que $m$ pode tomar é quando $\omega=0$ e quando $l=N$ e assim o limite superior de $m$ é $N$. O limite inferior é quando $l=N$ e quando $\omega = l = N$, então $m=-N$. A variação de $m$ não é unitária, pois para um $l$ fixo, por exemplo $l=10$ e $\omega=0$, o próximo passo é $l=10$ e $\omega=1$, então, $m$ foi de $10$ para $10-2=8$. Com isso se conclui que $m$ varia de dois em dois. O somatório em $\omega$ também sobre modificações e para avaliar considere o expoente de $p$. Esse expoente deve sempre estar entre os limites:
+\begin{equation}
+0 \leq N-m-2\omega \leq N \quad,
+\end{equation}
+dessa forma se $m=-N$ então $\omega$ deve ser igual a zero e caso $m=N$ então $\omega$ deve ser igual a $N$.
+
+Reescrevendo os somatórios substituindo $l=m+2\omega$,
+\begin{equation}
+g_m(k) = \sum\limits_{m=-N}^N \sum\limits_{\omega=0}^N \frac{N!}{(N-m-2\omega)!(m + \omega)!\omega !} p^{N-m-2\omega} \left(\frac{q}{2}\right)^{m+\omega}e^{ikm} \quad,
+\end{equation}
+conseguimos calcular a distribuição de probabilidades, 
+\begin{equation}
+P_N(m) = \sum\limits_{\omega=0}^N \frac{N!}{(N-m-2\omega)!(m + \omega)!\omega !} p^{N-m-2\omega} \left(\frac{q}{2}\right)^{m+\omega}.
+\end{equation}
+Esse resultado nos fala e seguinte, para cada distância $m$ percorrida temos que levar em conta as possibilidade tanto do bêbado ficar parado quando as possibilidades do bêbado ir e voltar. 
+
+Como as variáveis aleatórias são uniformes e identicamente distribuídas com os momentos bem definidos podemos utilizar a lei dos grandes números para encontrar a distribuição de probabilidade para $N > 1$. Sabemos que a distribuição nesse limite deve ter a forma,
+\begin{equation}
+P_m(N) = \frac{1}{\sqrt{2\pi \kappa_2}}\exp{\left[-\frac{(m-\kappa_1)^2}{2\kappa_2}\right]} \quad ,
+\end{equation}
+onde $\kappa_1$ e $\kappa_2$ são o primeiro e segundo cumulantes e eles se relacional com o primeiro segundo momento da seguinte forma,
+\begin{equation}
+\kappa_1 = \mu_1, \quad \kappa_2 = \mu_2 - \mu_1^2\quad. 
+\end{equation}
+Como os momentos são mais fáceis de calcular vou calcula-los a partir da função característica. O primeiro momento:
+\begin{equation}
+\begin{split}
+\frac{d(p + q\cos(k))^N}{dk} = N(p + q\cos(k))^{N-1}(-q\sin(k))\\
+\mu_1 = i\frac{idg(k)}{dk}\Big\rvert_{k=0} = 0. 
+\end{split}
+\end{equation}
+Aqui foi usado a definição dos cossenos por meio de exponenciais complexas. O segundo momento é então calculado:
+\begin{equation}
+\begin{split}
+i^2\frac{d^2g(k)}{dk^2} =  N(N-1)(p + q\cos(k))^{N-2}(-q\sin(k))^2 +\\
+N(p + q\cos(k)^{N-1}(-q\cos(k))\\
+\mu_2 = Nq,
+\end{split}
+\end{equation}
+onde o cosseno vai a um e $p+q=1$. 
+Com isso escrevemos a distribuição de probabilidade,
+\begin{equation}
+P_m(N) = \frac{1}{\sqrt{2\pi Nq}}\exp{\left[-\frac{m^2}{2Nq}\right]}
+\end{equation}
+
+\section*{Exercício 4}
 
 \section*{Exercício 7}
 A equação de Fokker-Planck pode ser escrita como uma equação de continuidade,
